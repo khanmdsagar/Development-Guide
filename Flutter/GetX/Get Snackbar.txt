@@ -1,0 +1,11 @@
+ Get.snackbar(
+                    "Hello",
+                    "How are you?",
+                    backgroundColor: Colors.black45,
+                    snackPosition: SnackPosition.TOP,
+                    borderRadius: 5,
+                    margin: EdgeInsets.fromLTRB(10,10,10,10),
+                    duration: Duration(seconds: 2),
+                    icon: Icon(Icons.notifications, color: Colors.white),
+                    colorText: Colors.white,
+                );

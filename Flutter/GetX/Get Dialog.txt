@@ -1,0 +1,10 @@
+Get.defaultDialog(
+                  title: "Do you want to delete?",
+                  middleText: "Once delete can't be retrive.",
+                  contentPadding: EdgeInsets.all(20),
+                  titlePadding: EdgeInsets.only(top:20),
+                  // textConfirm: "OK",
+                  // textCancel: "Cancel"
+                  cancel: TextButton(onPressed: (){}, child: Text("Cancel")),
+                  confirm: TextButton(onPressed: (){}, child: Text("Delete")),
+                );
