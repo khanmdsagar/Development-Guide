@@ -1,0 +1,7 @@
+1. create ssh file
+2. create wpa_supplicant.conf file
+3. update and upgrade os
+4. enable vnc from sudo raspi-config
+5. install xrdp & tightvncserver
+
+6. Ubuntu server -> user: ubuntu, pass: ubuntu

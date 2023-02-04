@@ -1,0 +1,22 @@
+diskpart
+list disk
+
+select disk <related disk>
+
+list partition
+
+select partition <System partition>
+
+assign letter=k
+
+exit
+
+k:
+
+dir
+
+cd EFI
+
+dir
+
+rd ubuntu /s

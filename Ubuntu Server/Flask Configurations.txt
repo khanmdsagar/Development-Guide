@@ -1,0 +1,28 @@
+<VirtualHost *:80>
+                ServerName shopmaster1.gbazar.store
+                ServerAdmin admin@shopmaster1.gbazar.store
+                WSGIScriptAlias / /var/www/shopmaster1.gbazar.store/web_app/myflaskapp.wsgi
+                <Directory /var/www/shopmaster1.gbazar.store/web_app/>
+                        Order allow,deny
+                        Allow from all
+                </Directory>
+                Alias /static /var/www/shopmaster1.gbazar.store/web_app/static
+                <Directory /var/www/shopmaster1.gbazar.store/web_app/static/>
+                        Order allow,deny
+                        Allow from all
+                </Directory>
+                ErrorLog ${APACHE_LOG_DIR}/error.log
+                LogLevel warn
+                CustomLog ${APACHE_LOG_DIR}/access.log combined
+</VirtualHost>
+
+=>myflaskapp.wsgi
+
+#!/usr/bin/python
+import sys
+import logging
+logging.basicConfig(stream=sys.stderr)
+sys.path.insert(0,"/var/www/shopmaster1.gbazar.store/web_app")
+
+from app import app as application
+application.secret_key = 'xdd343rerteggkjkurter3r3'

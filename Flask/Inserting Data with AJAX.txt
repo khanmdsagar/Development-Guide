@@ -1,0 +1,22 @@
+class CustomerTransaction:
+    def AddTransactionToDB(self):
+        try:
+            detail      = request.json["detail"]
+            amount      = request.json["amount"]
+            type        = request.json["type"]
+            date        = request.json["date"]
+            dateObject  = datetime.datetime.strptime(date, '%d-%m-%Y')
+            CustomerId  = request.json["customer_id"]
+
+            transaction      = Transaction(detail=detail, amount=amount, type=type, date=dateObject, customer_id=CustomerId)
+            transactionCount = Transaction.query.filter_by(detail=detail, amount=amount, type=type).count()
+
+            if transactionCount == 0:
+                db.session.add(transaction)
+                db.session.commit()
+                return jsonify(message="লেনদেন যুক্ত হয়েছে")
+            else:
+                return jsonify(message="লেনদেন ইতমধ্যে যুক্ত আছে")
+            
+        except Exception as e:
+            return jsonify(message="লেনদেন যুক্ত করা যায়নি")

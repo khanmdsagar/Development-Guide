@@ -1,0 +1,49 @@
+import os
+
+domain     = input("Enter your domain name: ")
+email      = input("Enter your email: ")
+webAppType = input("Type of the app: ")
+
+def setupPhpApp():
+    try:
+        os.system(f"mkdir /var/www/{domain}")
+        os.system(f"mkdir /var/www/{domain}/web_app")
+        os.system(f"touch /var/www/{domain}/web_app/index.php")
+
+        os.system(f"touch /etc/apache2/sites-available/{domain}.conf")
+
+        configuration1 = f"""
+            <VirtualHost *:80>
+                ServerAdmin {email}
+                ServerName {domain}
+                ServerAlias www.{domain}
+                DocumentRoot /var/www/{domain}/web_app """
+
+        configuration2 = """
+                ErrorLog ${APACHE_LOG_DIR}/error.log
+                CustomLog ${APACHE_LOG_DIR}/access.log combined
+            </VirtualHost> """
+
+        configuration = configuration1 + configuration2
+
+        confFile = open(f"/etc/apache2/sites-available/{domain}.conf", "a")
+        confFile.write(configuration)
+        confFile.close()
+
+        os.system(f"a2ensite {domain}.conf")
+        os.system("systemctl reload apache2")
+
+        print("Good to go")
+    except Exception as e:
+        print("Failed")
+
+if webAppType == "php":
+    setupPhpApp()
+elif webAppType == "flask":
+    pass
+elif webAppType == "django":
+    pass
+elif webAppType == "express":
+    pass
+else:
+    setupPhpApp()

@@ -1,0 +1,6 @@
+1. npm install -g express-generator
+2. npx express --view=ejs
+3. npm install mysql
+4. npm install express
+5. database.js
+	

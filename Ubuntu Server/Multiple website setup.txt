@@ -1,0 +1,29 @@
+mkdir -p /var/www/khanmicrosystem.com/public_html
+
+	opt - chown -R $USER:$USER /var/www/html/khanmicrosystem.com/public_html
+
+	opt - chmod -R 755 /var/www/html
+
+cp /etc/apache2/sites-available/000-default.conf /etc/apache2/sites-available/khanmicrosystem.com.conf
+
+nano /etc/apache2/sites-available/khanmicrosystem.com.conf
+
+
+<VirtualHost *:80>
+	ServerAdmin root@khanmicrosystem.com
+	ServerName khanmicrosystem.com
+	ServerAlias www.khanmicrosystem.com
+	DocumentRoot /var/www/html/khanmicrosystem.com/public_html
+	ErrorLog ${APACHE_LOG_DIR}/error.log
+	CustomLog ${APACHE_LOG_DIR}/access.log combined
+</VirtualHost>
+
+
+sudo a2ensite khanmicrosystem.com.conf
+
+systemctl reload apache2
+
+a2dissite 000-default.conf
+
+=> for flask (apt-get install libapache2-mod-wsgi-py3)
+

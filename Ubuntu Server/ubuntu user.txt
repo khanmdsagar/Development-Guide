@@ -1,0 +1,2 @@
+Ubuntu user
+1. list user group = cat /etc/group

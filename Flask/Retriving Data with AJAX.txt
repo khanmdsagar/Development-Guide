@@ -1,0 +1,16 @@
+    def GetTransactionData(self, id):
+        transactions = Transaction.query.filter_by(customer_id=id).order_by(desc(Transaction.id)).all()
+        output = []
+
+        for transaction in transactions:
+            transaction_data = {}
+
+            transaction_data["id"]     = transaction.id
+            transaction_data["detail"] = transaction.detail
+            transaction_data["amount"] = transaction.amount
+            transaction_data["type"]   = transaction.type
+            transaction_data["date"]   = datetime.datetime.strftime(transaction.date, '%d-%m-%Y')
+
+            output.append(transaction_data)
+
+        return jsonify(output)

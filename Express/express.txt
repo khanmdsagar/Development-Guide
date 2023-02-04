@@ -1,0 +1,73 @@
+npm init --y
+
+* Packages ->
+
+npm i express
+npm i express-rate-limit
+npm i helmet
+npm i dotenv
+npm i cors
+npm i mysql
+npm i body-parser
+npm i hpp
+npm i nodemon
+
+* dockerize
+FROM node:16-alpine
+WORKDIR /app
+COPY package.json /app
+RUN npm install
+COPY . /app
+CMD ["npm", "start"]
+
+docker build -t image_name
+docker run -p external_port:internal_port image_name
+docker run -it -p external_port:internal_port -v $(pwd):/app image_name
+
+
+
+* folder structure ->
+
+npm init --y (package.json)
+index.js (root)
+app.js   (root)
+.env
+
+
+* app
+   -> controllers
+   -> models
+   -> routes
+
+
+* insert data in Mongo DB
+	// let customerInfo = new CustomerInfoModel(req.body)
+    	//
+    	// customerInfo.save()
+    	//     .then(()=>{
+    	//         res.status(200).json({message: "Saved"})
+    	//     })
+    	//     .catch((error)=>{
+    	//         res.status(200).json({message: error})
+    	//     })
+
+    CustomerInfoModel.create(req.body, (err, data)=>{
+        if(err){
+            res.status(400).json({message: "Failed", data: err})
+        }
+        else{
+            res.status(200).json({message: "Saved", data: data})
+        }
+    })
+
+
+* get data
+exports.getCustomer = (req, res)=>{
+    let query = {store_id: req.body.store_id}
+    let projection = "name phone address store_id"
+
+    CustomerModel.find(query, projection, (err, data)=>{
+        if(err){res.status(400).json({message: "Failed", data: err})}
+        else{res.status(200).json({message: "Success", data: data})}
+    })
+}

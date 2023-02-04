@@ -1,0 +1,4 @@
+1. gRPC protocol (protobuf)
+2. Master DB, Slave DB
+3. Load Balancing
+4. Cache server
